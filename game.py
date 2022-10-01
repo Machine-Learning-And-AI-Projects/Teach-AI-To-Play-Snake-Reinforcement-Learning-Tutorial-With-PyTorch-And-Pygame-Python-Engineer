@@ -32,7 +32,7 @@ BLUE2 = (0, 100, 255)
 BLACK = (0, 0, 0)
 
 BLOCK_SIZE = 20
-SPEED = 20
+SPEED = 40  # Default:  20 frames per second
 
 
 class SnakeGameAI:
@@ -83,7 +83,6 @@ class SnakeGameAI:
         self.snake.insert(0, self.head)
 
         # 3. check if game over
-
         reward = 0
         game_over = False
         if self.is_collision() or self.frame_iteration > 100 * len(self.snake):
@@ -149,9 +148,9 @@ class SnakeGameAI:
         idx = clock_wise.index(self.direction)
 
         new_dir = None
-        if np.array_equl(action, [1, 0, 0]):
+        if np.array_equal(action, [1, 0, 0]):
             new_dir = clock_wise[idx]  # no change
-        elif np.array_equl(action, [0, 1, 0]):
+        elif np.array_equal(action, [0, 1, 0]):
             next_index = (idx + 1) % 4
             new_dir = clock_wise[next_index]  # right turn r -> d -> l -> u
         else:  # action[0, 0, 1]
